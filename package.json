@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run dev:cms & npm run dev:server",
+    "dev:cms": "pnpm run -C packages/cms dev",
+    "dev:server": "pnpm run -C packages/server start:dev & pnpm run open:swagger",
+    "open:swagger": "pnpm run -C packages/scripts open --url=http://127.0.0.1:3000/api/doc"
   },
   "keywords": [],
   "author": "",
