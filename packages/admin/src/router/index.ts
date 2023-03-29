@@ -1,57 +1,14 @@
-import auth, { AuthParams } from '@/utils/authentication';
 import { useEffect, useMemo, useState } from 'react';
 
-export type IRoute = AuthParams & {
-  name: string;
-  key: string;
-  // 当前页是否展示面包屑
-  breadcrumb?: boolean;
-  children?: IRoute[];
-  // 当前路由是否渲染菜单项，为 true 的话不会在菜单中显示，但可通过路由地址访问。
-  ignore?: boolean;
-};
+import routes from './routes';
+import { IRoute } from './route';
+import auth from '@/utils/authentication';
 
-export const routes: IRoute[] = [
-  {
-    name: 'menu.dashboard',
-    key: 'dashboard',
-    children: [
-      {
-        name: 'menu.dashboard.workplace',
-        key: 'dashboard/workplace',
-      },
-    ],
-  },
-  {
-    name: 'Example',
-    key: 'example',
-  },
-];
-
-export const getName = (path: string, routes) => {
-  return routes.find((item) => {
-    const itemPath = `/${item.key}`;
-    if (path === itemPath) {
-      return item.name;
-    } else if (item.children) {
-      return getName(path, item.children);
-    }
-  });
-};
-
-export const generatePermission = (role: string) => {
-  const actions = role === 'admin' ? ['*'] : ['read'];
-  const result = {};
-  routes.forEach((item) => {
-    if (item.children) {
-      item.children.forEach((child) => {
-        result[child.name] = actions;
-      });
-    }
-  });
-  return result;
-};
-
+/**
+ * 路由 Hooks
+ * @param userPermission 用户权限
+ * @returns
+ */
 const useRoute = (userPermission): [IRoute[], string] => {
   const filterRoute = (routes: IRoute[], arr = []): IRoute[] => {
     if (!routes.length) {
@@ -84,10 +41,15 @@ const useRoute = (userPermission): [IRoute[], string] => {
   const [permissionRoute, setPermissionRoute] = useState(routes);
 
   useEffect(() => {
+    // TODO: 这里默认会执行一次吗 ？
+    // 基于用户权限过滤出符合当前权限的路由表
     const newRoutes = filterRoute(routes);
     setPermissionRoute(newRoutes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(userPermission)]);
 
+  // 计算出默认路由
+  // 打开页面后，默认打开第一个路由
   const defaultRoute = useMemo(() => {
     const first = permissionRoute[0];
     if (first) {
@@ -98,6 +60,36 @@ const useRoute = (userPermission): [IRoute[], string] => {
   }, [permissionRoute]);
 
   return [permissionRoute, defaultRoute];
+};
+
+/**
+ * 通过 path 查找对应的路由名称
+ * @param path
+ * @param routes 完整的路由表数组
+ * @returns
+ */
+export const getName = (path: string, routes) => {
+  return routes.find((item) => {
+    const itemPath = `/${item.key}`;
+    if (path === itemPath) {
+      return item.name;
+    } else if (item.children) {
+      return getName(path, item.children);
+    }
+  });
+};
+
+export const generatePermission = (role: string) => {
+  const actions = role === 'admin' ? ['*'] : ['read'];
+  const result = {};
+  routes.forEach((item) => {
+    if (item.children) {
+      item.children.forEach((child) => {
+        result[child.name] = actions;
+      });
+    }
+  });
+  return result;
 };
 
 export default useRoute;

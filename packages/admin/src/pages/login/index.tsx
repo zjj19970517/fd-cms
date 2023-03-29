@@ -1,12 +1,23 @@
 import React, { useEffect } from 'react';
+
+// components
 import Footer from '@/components/Footer';
-import Logo from '@/assets/logo.svg';
 import LoginForm from './form';
 import LoginBanner from './banner';
+
+// assets
+import Logo from '@/assets/logo.svg';
+
+// styles
 import styles from './style/index.module.less';
 
+/**
+ * @page 登录页面
+ * @returns
+ */
 function Login() {
   useEffect(() => {
+    // 登录页面只设置 light 主题风格
     document.body.setAttribute('arco-theme', 'light');
   }, []);
 
