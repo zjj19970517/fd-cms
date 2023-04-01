@@ -13,4 +13,6 @@ export const generateDocument = (app) => {
 
   // 访问 /api/doc 可以查看我们的 Swagger 文档
   SwaggerModule.setup('/api/doc', app, document);
+
+  console.log('open swagger doc: http://127.0.0.1:3000/api/doc');
 };

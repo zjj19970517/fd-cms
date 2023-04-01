@@ -23,7 +23,7 @@ import './mock';
 const store = createStore(rootReducer);
 
 function Index() {
-  const [lang, setLang] = useStorage('arco-lang', 'en-US');
+  const [lang, setLang] = useStorage('arco-lang', 'zh-CN');
   const [theme, setTheme] = useStorage('arco-theme', 'light');
 
   // 获取 Arco 的语言包配置
@@ -40,11 +40,12 @@ function Index() {
 
   // 请求获取用户信息
   function fetchUserInfo() {
-    // TODO: 继续研读
+    // 用户信息加载中
     store.dispatch({
       type: 'update-userInfo',
       payload: { userLoading: true },
     });
+    // 获取用户信息
     axios.get('/api/user/userInfo').then((res) => {
       store.dispatch({
         type: 'update-userInfo',

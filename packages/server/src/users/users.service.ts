@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { SharedService } from '../shared/services/shared.service';
 
 @Injectable()
 export class UsersService {
+  constructor(private readonly sharedService: SharedService) {}
+
   create(createUserDto: CreateUserDto) {
+    console.log(this.sharedService.getTest());
     return 'This action adds a new user';
   }
 
