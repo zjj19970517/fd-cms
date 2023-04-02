@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { SharedService } from '../shared/services/shared.service';
+import { SharedService } from '../../shared/services/shared.service';
 
 @Injectable()
 export class UsersService {
