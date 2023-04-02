@@ -1,15 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { SharedService } from '../../shared/services/shared.service';
+import { MongoRepository } from 'typeorm';
+import { User } from './entities/user.mongo.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly sharedService: SharedService) {}
+  constructor(
+    private readonly sharedService: SharedService,
+    @Inject('USER_REPOSITORY')
+    private userRepository: MongoRepository<User>,
+  ) {}
 
-  create(createUserDto: CreateUserDto) {
-    console.log(this.sharedService.getTest());
-    return 'This action adds a new user';
+  create(user: CreateUserDto) {
+    return this.userRepository.save(user);
   }
 
   findAll() {

@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { SharedService } from './services/shared.service';
 import { configModuleOptions } from '../config/module-options';
+import { DatabaseProviders } from './providers/database.providers';
 
 @Module({
   imports: [ConfigModule.forRoot(configModuleOptions)],
@@ -11,7 +12,14 @@ import { configModuleOptions } from '../config/module-options';
     SharedService,
     // 配置中心
     ConfigModule,
+    // 数据库
+    ...DatabaseProviders,
   ],
-  providers: [SharedService],
+  providers: [
+    // 共享
+    SharedService,
+    // 数据库
+    ...DatabaseProviders,
+  ],
 })
 export class SharedModule {}

@@ -8,7 +8,10 @@
     "dev:cms": "pnpm run -C packages/cms dev",
     "dev:admin": "pnpm run -C packages/admin dev",
     "dev:server": "pnpm run -C packages/server start:dev",
-    "open:swagger": "pnpm run -C packages/scripts open --url=http://127.0.0.1:3000/api/doc"
+    "open:swagger": "pnpm run -C packages/scripts open --url=http://127.0.0.1:3000/api/doc",
+    "db:start": "docker-compose up -d redis mongo mongo-express",
+    "db:stop": "docker-compose down",
+    "db:restore": "docker-compose exec mongo mongorestore --db nest-server /dump/init/nest-server"
   },
   "keywords": [],
   "author": "",

@@ -21,7 +21,7 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    console.log('配置中心', this.configService.get<string>('database.url'));
+    console.log('配置中心', this.configService.get<string>('database'));
     return this.usersService.create(createUserDto);
   }
 
