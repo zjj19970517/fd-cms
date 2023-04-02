@@ -1,12 +1,29 @@
-export default (): any => ({
-  env: process.env.APP_ENV,
-  port: process.env.APP_PORT,
-  database: {
-    url: process.env.DB_URL,
-    name: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    pass: process.env.DB_PASS,
-    synchronize: process.env.DB_SYNCHRONIZE,
-    logging: process.env.DB_LOGGING,
-  },
-});
+import developmentConfig from './configuration.development';
+import productionConfig from './configuration.production';
+import { IS_DEV } from 'src/shared/utils/env';
+
+export interface IConfig {
+  appEnv: string;
+  port: number | string;
+  /**
+   * 数据库配置
+   */
+  database?: {
+    url: string;
+    name: string;
+    user: string;
+    password: string;
+    synchronize: boolean;
+    logging: boolean;
+  };
+}
+
+/**
+ * 配置中心
+ */
+export default (): IConfig => {
+  if (IS_DEV) {
+    return developmentConfig;
+  }
+  return productionConfig;
+};
