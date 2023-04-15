@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["lazyload", "nestjs", "Sider", "svgr", "typeorm", "wuxi"]
+  "cSpell.words": [
+    "lazyload",
+    "nestjs",
+    "Sider",
+    "svgr",
+    "typeorm",
+    "VITE",
+    "wuxi"
+  ]
 }
