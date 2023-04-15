@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconDashboard, IconTag } from '@arco-design/web-react/icon';
+import { IconDashboard, IconRobot, IconTag } from '@arco-design/web-react/icon';
 
 import styles from '../style/menu-icon.module.less';
 
@@ -15,6 +15,8 @@ export function getIconFromKey(key) {
       return <IconDashboard className={styles.icon} />;
     case 'example':
       return <IconTag className={styles.icon} />;
+    case 'map-examples':
+      return <IconRobot className={styles.icon} />;
     default:
       return <div className={styles['icon-empty']} />;
   }

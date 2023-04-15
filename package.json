@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run dev:cms & npm run dev:server",
-    "dev:cms": "pnpm run -C packages/cms dev",
     "dev:admin": "pnpm run -C packages/admin dev",
     "dev:server": "pnpm run -C packages/server start:dev",
     "open:swagger": "pnpm run -C packages/scripts open --url=http://127.0.0.1:3000/api/doc",

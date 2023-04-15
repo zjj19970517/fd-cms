@@ -7,6 +7,12 @@ import setting from './src/settings.json';
 export default defineConfig({
   server: {
     port: 5173,
+    proxy: {
+      '/style/2.0.1': {
+        target: 'https://vdata.amap.com',
+        changeOrigin: true,
+      },
+    },
   },
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],

@@ -13,8 +13,22 @@ const routes: IRoute[] = [
     ],
   },
   {
-    name: 'Example',
-    key: 'example',
+    name: 'menu.map_example',
+    key: 'map-examples',
+    children: [
+      {
+        name: 'menu.map_example.quick_start',
+        key: 'map-examples/quick-start',
+      },
+      {
+        name: 'menu.map_example.add_region',
+        key: 'map-examples/add-region',
+      },
+      {
+        name: 'menu.map_example.draw_route',
+        key: 'map-examples/draw-route',
+      },
+    ],
   },
 ];
 
