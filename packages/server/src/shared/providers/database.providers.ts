@@ -24,6 +24,7 @@ export const DatabaseProviders = [
         ],
         logging: configService.get<boolean>('mongoDatabase.logging'),
         synchronize: configService.get<boolean>('mongoDatabase.synchronize'),
+        useUnifiedTopology: true,
       };
 
       const ds = new DataSource(config);
