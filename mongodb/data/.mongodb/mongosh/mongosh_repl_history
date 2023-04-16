@@ -1,0 +1,26 @@
+use nest-server
+use admin
+use nest-server
+db.auth("admin","123456")
+})
+    roles: [{ role: 'dbAdmin', db: 'nest-server' }]
+    pwd: '123456',
+    user: 'admin',
+db.createUser({
+    roles: [{ role: 'root', db: 'admin' }]
+    pwd: '123456',
+    user: 'root',
+db.createUser({
+show dbs;
+db.createUser({ user: 'root', pwd: '123456', roles: [{ role: 'root', db: 'admin' }] })
+mongodb://root1:123456@localhost:27017/admin
+db.createUser({ user: 'root', pwd: '123456', roles: [{ role: 'root', db: 'admin' }] })
+db.findall()
+db.findAll()
+show dbs;
+use adminroles: [{ role: 'root', db: 'admin' }] })createUser({b.findall()
+db.findAll()
+show dbs;
+use adminroles: [{ role: 'root', db: 'admin' }] })createUser({indAll()
+show dbs;
+use adminroles: [{ role: 'root', db: 'admin' }] })createUser({createUser({

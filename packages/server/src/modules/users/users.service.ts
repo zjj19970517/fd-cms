@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { SharedService } from '../../shared/services/shared.service';
 import { MongoRepository } from 'typeorm';
 import { User } from './entities/user.mongo.entity';
+import { LoggerService } from 'src/shared/services/logger.service';
 
 @Injectable()
 export class UsersService {
@@ -11,13 +12,17 @@ export class UsersService {
     private readonly sharedService: SharedService,
     @Inject('USER_REPOSITORY')
     private userRepository: MongoRepository<User>,
-  ) {}
+    private readonly logger: LoggerService,
+  ) {
+    this.logger.setContext(UsersService.name);
+  }
 
   create(user: CreateUserDto) {
     return this.userRepository.save(user);
   }
 
   findAll() {
+    this.logger.info('findAll', '查询正常');
     return `This action returns all users`;
   }
 
