@@ -9,6 +9,7 @@ services:
       - ./mongodb/dump:/dump
     ports:
       - 27017:27017
+
   mongo-express:
     image: mongo-express
     restart: always
@@ -16,6 +17,7 @@ services:
       - 8082:8082
     depends_on:
       - mongo
+
   redis:
     image: redis
     command: redis-server --requirepass arco666psw

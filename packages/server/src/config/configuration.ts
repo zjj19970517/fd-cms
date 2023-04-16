@@ -1,5 +1,5 @@
-import developmentConfig from './configuration.development';
-import productionConfig from './configuration.production';
+import genDevelopmentConfig from './configuration.development';
+import genProductionConfig from './configuration.production';
 import { IS_DEV } from 'src/shared/utils/env';
 
 export interface IConfig {
@@ -8,8 +8,9 @@ export interface IConfig {
   /**
    * 数据库配置
    */
-  database?: {
-    url: string;
+  mongoDatabase?: {
+    host: string;
+    port: number;
     name: string;
     user: string;
     password: string;
@@ -23,7 +24,7 @@ export interface IConfig {
  */
 export default (): IConfig => {
   if (IS_DEV) {
-    return developmentConfig;
+    return genDevelopmentConfig();
   }
-  return productionConfig;
+  return genProductionConfig();
 };
